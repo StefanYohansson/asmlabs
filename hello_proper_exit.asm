@@ -5,6 +5,7 @@
 message:        db 'hello, world!', 10
 
         section .text
+        %include "libio/libio.inc"
 _start:
         mov rax, 1
         mov rdi, 1
@@ -12,6 +13,4 @@ _start:
         mov rdx, 14
         syscall
 
-        mov rax, 60
-        xor rdi, rdi
-        syscall
+        call exit

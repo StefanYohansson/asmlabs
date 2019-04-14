@@ -3,6 +3,7 @@ codes:
         db      '0123456789ABCDEF'
 
         section .text
+        %include "libio/libio.inc"
         global _start
 _start:
         mov rax, 0x1122334455667788
@@ -28,8 +29,6 @@ _start:
         test rcx, rcx
         jnz .loop
 
-        mov rax, 60
-        xor rdi, rdi
-        syscall
+        call exit
         
         
