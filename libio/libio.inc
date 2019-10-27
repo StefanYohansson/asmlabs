@@ -1,6 +1,7 @@
 global exit
 global string_length
 global print_string
+global string_copy
 
 exit:
         mov rax, 60
@@ -34,4 +35,17 @@ print_string:
         syscall
         pop r13
         pop r14
+        ret
+
+string_copy:
+        push rsi
+.loop:
+        mov dl, byte[rdi]
+        mov byte[rsi], dl
+        inc rdi
+        inc rsi
+        test dl, dl
+        jnz .loop
+
+        pop rax
         ret
