@@ -2,11 +2,12 @@ global exit
 global string_length
 global print_string
 global string_copy
+global print_char
 
 exit:
-        mov rax, 60
-        xor rdi, rdi
-        syscall
+        mov rax, 60             ; exit operation
+        xor rdi, rdi            ; 0ed rdi register
+        syscall                 ; call exit 0 operation
 
 string_length:
         push r13
@@ -22,19 +23,19 @@ string_length:
         ret
 
 print_string:
-        push r14
-        xor rax, rax
-        call string_length
-        mov r14, rax
-        push r13
-        mov r13, rdi
-        mov rax, 1
-        mov rdi, 1
-        mov rsi, r13
-        mov rdx, r14
-        syscall
-        pop r13
-        pop r14
+        push r14                ; save register
+        xor rax, rax            ; 0ed rax register
+        call string_length      ; call string_length
+        mov r14, rax            ; move return of string_length into r14 register
+        push r13                ; save register
+        mov r13, rdi            ; move print_string argument (string to print) into r13 register
+        mov rax, 1              ; write operation
+        mov rdi, 1              ; stdout
+        mov rsi, r13            ; pass string to output
+        mov rdx, r14            ; pass string length
+        syscall                 ; call print to stdout operation
+        pop r13                 ; restore register
+        pop r14                 ; restore register
         ret
 
 string_copy:
@@ -48,4 +49,11 @@ string_copy:
         jnz .loop
 
         pop rax
+        ret
+
+print_char:
+        push rdi                ; save register
+        mov rdi, rsp            ; add rdi to top of stack
+        call print_string       ; call print_string
+        pop rdi                 ; restore register
         ret
