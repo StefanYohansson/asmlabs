@@ -3,6 +3,7 @@ global string_length
 global print_string
 global string_copy
 global print_char
+global print_newline        
 
 exit:
         mov rax, 60             ; exit operation
@@ -52,8 +53,22 @@ string_copy:
         ret
 
 print_char:
+#        push rdi
+#        mov rax, 1
+#        mov rdi, 1
+#        mov rsi, rsp
+#        mov rdx, 1
+#        syscall
+#        pop rdi                 
         push rdi                ; save register
-        mov rdi, rsp            ; add rdi to top of stack
+        mov rdi, rsp            ; move top of stack value into rdi
         call print_string       ; call print_string
+        pop rdi                 ; restore register
+        ret
+
+print_newline:
+        push rdi                ; save register
+        mov rdi, 0xa            ; move 0xA (newline feed) value into rdi
+        call print_char         ; call print_char
         pop rdi                 ; restore register
         ret
