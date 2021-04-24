@@ -6,7 +6,13 @@ compile:
 link:
 	ld -o build/${OBJ} build/${OBJ}.o
 
-compile_c_exercises:
+compile_c_exercises_dotproduct:
+	gcc -Werror \
+		exercises_c/dotproduct.c \
+ 		exercises_c/dotproduct_runner.c \
+ 		-o exercises_c/build/dotproduct
+
+compile_c_exercises_tests:
 	gcc -Werror \
 		-I./exercises_c/munit \
  		exercises_c/munit/munit.c \
