@@ -3,7 +3,8 @@ global string_length
 global print_string
 global string_copy
 global print_char
-global print_newline        
+global print_newline
+global print_uint
 
 exit:
         mov rax, 60             ; exit operation
@@ -53,13 +54,6 @@ string_copy:
         ret
 
 print_char:
-#        push rdi
-#        mov rax, 1
-#        mov rdi, 1
-#        mov rsi, rsp
-#        mov rdx, 1
-#        syscall
-#        pop rdi                 
         push rdi                ; save register
         mov rdi, rsp            ; move top of stack value into rdi
         call print_string       ; call print_string
@@ -71,4 +65,28 @@ print_newline:
         mov rdi, 0xa            ; move 0xA (newline feed) value into rdi
         call print_char         ; call print_char
         pop rdi                 ; restore register
+        ret
+
+print_uint:
+        ; rdi holds 8-byte unsigned integer
+        mov rax, rdi
+        mov rdi, rsp
+        push 0
+        sub rsp, 16
+
+        mov r9, 10
+
+        dec rdi
+        .loop:
+                xor rdx, rdx
+                div r9
+                add rdx, '0'
+                dec rdi
+                mov [rdi], dl
+                test rax, rax
+                jnz .loop
+
+        call print_string
+
+        add rsp, 24
         ret

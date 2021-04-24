@@ -6,8 +6,18 @@ compile:
 link:
 	ld -o build/${OBJ} build/${OBJ}.o
 
+compile_c_exercises:
+	gcc -Werror \
+		-I./exercises_c/munit \
+ 		exercises_c/munit/munit.c \
+ 		exercises_c/dotproduct.c \
+ 		exercises_c/dotproduct_test.c \
+ 		exercises_c/runner.c \
+ 		-o exercises_c/build/test_runner
+
 testlibio: clean
-	cp libio/libio.inc build/ && cd build/ && python ../libio/test.py
+	cp libio/libio.inc.asm build/ && cd build/ && python ../libio/test.py
 
 clean:
 	rm -rf build/*
+	rm -rf exercises_c/build/*

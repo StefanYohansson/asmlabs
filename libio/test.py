@@ -163,7 +163,7 @@ tests=[ Test('string_length',
              lambda v : """section .data
         str: db '""" + v + """', 0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start
         _start:
         """ + before_call + """
@@ -180,7 +180,7 @@ tests=[ Test('string_length',
              lambda v : """section .data
         str: db '""" + v + """', 0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -199,7 +199,7 @@ tests=[ Test('string_length',
         arg1: db '""" + v + """', 0
         arg2: times """ + str(len(v) + 1) +  """ db  66
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -218,7 +218,7 @@ tests=[ Test('string_length',
 
         Test('print_char',
             lambda v:""" section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -232,7 +232,7 @@ tests=[ Test('string_length',
 
         Test('print_uint',
             lambda v: """section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -246,7 +246,7 @@ tests=[ Test('string_length',
         
         Test('print_int',
             lambda v: """section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -260,7 +260,7 @@ tests=[ Test('string_length',
 
         Test('read_char',
              lambda v:"""section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -276,7 +276,7 @@ tests=[ Test('string_length',
         section .data
         word_buf: times 20 db 0xca
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -297,7 +297,7 @@ tests=[ Test('string_length',
         section .data
         word_buf: times 20 db 0xca
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -316,7 +316,7 @@ tests=[ Test('string_length',
         section .data
         word_buf: times 20 db 0xca
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -334,7 +334,7 @@ tests=[ Test('string_length',
              lambda v: """section .data
         input: db '""" + v  + """', 0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -353,7 +353,7 @@ tests=[ Test('string_length',
              lambda v: """section .data
         input: db '""" + v  + """', 0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
@@ -373,7 +373,7 @@ tests=[ Test('string_length',
              str1: db '""" + v + """',0
              str2: db '""" + v + """',0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start
         _start:
         """ + before_call + """
@@ -391,7 +391,7 @@ tests=[ Test('string_length',
              str1: db '""" + v + """',0
              str2: db '""" + v + """!!',0
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start
         _start:
         """ + before_call + """
@@ -412,7 +412,7 @@ tests=[ Test('string_length',
         arg1: db '""" + v + """', 0
         arg2: times """ + str(len(v)//2)  +  """ db  66
         section .text
-        %include "libio.inc"
+        %include "libio.inc.asm"
         global _start 
         _start:
         """ + before_call + """
